@@ -13,14 +13,33 @@ fun main(args: Array<String>) {
         exitProcess(0)
     }
 
-    args.forEachIndexed { index, arg ->
-        when (arg) {
-            "--input" -> inputDir = args.getOrElse(index + 1) { inputDir }
-            "--mapping" -> mappingFile = args.getOrElse(index + 1) { mappingFile }
-            "--output" -> outputDir = args.getOrElse(index + 1) { outputDir }
+    var i = 0
+    while (i < args.size) {
+        when (args[i]) {
+            "--input" -> {
+                if (i + 1 < args.size) {
+                    inputDir = args[i + 1]
+                    i++
+                }
+            }
+            "--mapping" -> {
+                if (i + 1 < args.size) {
+                    mappingFile = args[i + 1]
+                    i++
+                }
+            }
+            "--output" -> {
+                if (i + 1 < args.size) {
+                    outputDir = args[i + 1]
+                    i++
+                }
+            }
             "--dumpIDs" -> dumpIDs = true
         }
+        i++
     }
+    
+    println("Using input directory: $inputDir")
 
     Compendium(inputDir, mappingFile, outputDir, dumpIDs)
 }

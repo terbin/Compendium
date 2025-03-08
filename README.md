@@ -2,7 +2,7 @@
         ┏┓            ┓•     
         ┃ ┏┓┏┳┓┏┓┏┓┏┓┏┫┓┓┏┏┳┓
         ┗┛┗┛┛┗┗┣┛┗ ┛┗┗┻┗┗┻┛┗┗
-          v1.2 ┛ by Constructor
+          v1.4 ┛ by Constructor
 ```
 
 Compendium is a command-line application,
@@ -11,6 +11,8 @@ This process minimizes the dataset and eliminates map ID duplicates,
 which is particularly useful
 when merging multiple Minecraft worlds into a single one while maintaining a consistent map dataset.
 Compendium generates a modified save file with the updated map data.
+
+> **Minecraft Version Compatibility:** Compendium now supports Minecraft 1.21.1 format, including the new entity and map storage format.
 
 ## Key Features
 
@@ -26,12 +28,28 @@ Compendium generates a modified save file with the updated map data.
 
 - **Level Data Reallocation**: Compendium remaps the level data in a Minecraft save file.
 
+- **Minecraft 1.21.1 Support**: Compendium fully supports the new NBT format introduced in Minecraft 1.21.1, including the restructured entity format and the new component-based item storage for maps in item frames.
+
+## Minecraft Version Compatibility
+
+Compendium supports multiple Minecraft versions:
+
+| Minecraft Version | Status | Notes |
+|-------------------|--------|-------|
+| 1.19.x - 1.20.4   | ✅ Fully Supported | All map formats supported |
+| 1.21.1+           | ✅ Fully Supported | Supports new entity format and components-based item storage |
+
+When working with Minecraft 1.21.1 worlds:
+- Maps use a new storage format with the `components/minecraft:map_id` field
+- Item frames store maps differently with dedicated `item_id` and `has_map` fields
+- Unmapped maps will use negative ID values in the remapped world (consistent with pre-1.21.1 behavior)
+
 ## How to Use
 
 To use Compendium, execute the application with the appropriate command-line arguments. Here is the basic usage:
 
 ```
-java -jar compendium-1.2.jar [OPTIONS]
+java -jar Compendium-1.4.jar [OPTIONS]
 ```
 
 The available options are:
@@ -47,7 +65,7 @@ The available options are:
 Here is an example of how to use Compendium:
 
 ```
-java -jar compendium-1.2.jar --input 'my-save' --mapping 'my-mapping.json' --output 'my-remapped-save'
+java -jar Compendium-1.4.jar --input 'my-save' --mapping 'my-mapping.json' --output 'my-remapped-save'
 ```
 
 This command will remap the map items in the 'my-save' directory using the mappings in the 'my-mapping.json' file, and save the remapped files in the 'my-remapped-save' directory.
